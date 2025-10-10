@@ -1,6 +1,6 @@
 {
   "name": "payload-auditor",
-  "version": "1.8.0",
+  "version": "1.8.1",
   "description": "Simple, fast and customizable plugin for payload cms",
   "license": "MIT",
   "type": "module",
@@ -8,6 +8,12 @@
     "name": "seyed mojtaba shadab | shaadcode",
     "email": "shaadcode@gmail.com"
   },
+  "contributors": [
+    {
+      "name": "Danila Ermakov | dfuqq",
+      "email": "d.ermakov@friendlee.ru"
+    }
+  ],
   "keywords": [
     "payload",
     "plugin",
@@ -43,25 +49,25 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "pnpm test && pnpm check-types && pnpm copyfiles && pnpm build:types && pnpm build:swc",
+    "build": "npm run test && npm run check-types && npm run copyfiles && npm run build:types && npm run build:swc",
     "build:swc": "swc ./src -d ./dist --config-file .swcrc --strip-leading-paths --ignore **/*.test.ts **/*.test.tsx **/__tests__/**",
     "build:types": "tsc --outDir dist --rootDir ./src",
-    "build:only": "pnpm copyfiles && pnpm build:types && pnpm build:swc",
+    "build:only": "npm run copyfiles && npm run build:types && npm run build:swc",
     "clean": "rimraf {dist,*.tsbuildinfo}",
     "copyfiles": "copyfiles -u 1 \"src/**/*.{html,css,scss,ttf,woff,woff2,eot,svg,jpg,png,json}\" dist/",
     "dev": "payload run ./dev/server.mts",
-    "dev:generate-importmap": "pnpm dev:payload generate:importmap",
-    "dev:generate-types": "pnpm dev:payload generate:types",
+    "dev:generate-importmap": "npm run dev:payload generate:importmap",
+    "dev:generate-types": "npm run dev:payload generate:types",
     "dev:payload": "cross-env PAYLOAD_CONFIG_PATH=./dev/payload.config.ts payload",
     "lint": "eslint",
     "lint:fix": "eslint ./src --fix",
     "manual-publish": "npm publish --access public",
     "check-types": "npx tsc --noEmit --pretty",
-    "prepublishOnly": "pnpm clean && pnpm build",
-    "test:plugin": "pnpm clean && pnpm build && pnpm link && pnpm --dir ./dev link payload-auditor && pnpm dev",
-    "test:watch": "vitest --reporter=verbose ",
+    "prepublishOnly": "npm run clean && npm run build",
+    "test:plugin": "npm run clean && npm run build && npm link && npm --prefix ./dev link payload-auditor && npm run dev",
+    "test:watch": "vitest --reporter=verbose",
     "test": "vitest run",
-    "prepare": "pnpm build",
+    "prepare": "npm run build",
     "semantic-release": "semantic-release --dry-run",
     "commit": "cz",
     "precommit": "lint-staged"
@@ -70,11 +76,11 @@
     "@commitlint/cli": "^19.8.0",
     "@commitlint/config-conventional": "^19.8.0",
     "@eslint/eslintrc": "^3.2.0",
-    "@payloadcms/db-mongodb": "3.57.0",
-    "@payloadcms/next": "3.57.0",
-    "@payloadcms/richtext-lexical": "3.57.0",
+    "@payloadcms/db-mongodb": "^3.57.0",
+    "@payloadcms/next": "^3.57.0",
+    "@payloadcms/richtext-lexical": "^3.57.0",
     "@payloadcms/translations": "^3.57.0",
-    "@payloadcms/ui": "3.57.0",
+    "@payloadcms/ui": "^3.57.0",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "@swc-node/register": "1.10.9",
@@ -112,47 +118,11 @@
     "payload": "^3.57.0"
   },
   "engines": {
-    "node": "^18.20.2 || >=20.9.0",
-    "pnpm": "^9 || ^10"
-  },
-  "publishConfig": {
-    "exports": {
-      ".": {
-        "import": "./dist/index.js",
-        "types": "./dist/index.d.ts",
-        "default": "./dist/index.js"
-      },
-      "./client": {
-        "import": "./dist/exports/client.js",
-        "types": "./dist/exports/client.d.ts",
-        "default": "./dist/exports/client.js"
-      },
-      "./rsc": {
-        "import": "./dist/exports/rsc.js",
-        "types": "./dist/exports/rsc.d.ts",
-        "default": "./dist/exports/rsc.js"
-      }
-    },
-    "main": "./dist/index.js",
-    "types": "./dist/index.d.ts"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "sharp"
-    ]
-  },
-  "config": {
-    "commitizen": {
-      "path": "node_modules/cz-git"
-    }
+    "node": "^18.20.2 || >=20.9.0"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/shaadcode/payload-auditor"
+    "url": "https://github.com/dfuqq/payload-auditor#dep"
   },
-  "bugs": {
-    "url": "https://github.com/shaadcode/payload-auditor/issues"
-  },
-  "homepage": "https://github.com/shaadcode/payload-auditor#readme",
-  "registry": "https://registry.npmjs.org/"
+  "homepage": "https://github.com/dfuqq/payload-auditor#readme"
 }
