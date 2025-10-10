@@ -156,6 +156,7 @@ export const hookHandlers = {
       case 'login':
       case 'refresh': {
         baseLog.user = args.result.user.id.toString()
+        baseLog.type = 'security'
         break
       }
     }
@@ -227,7 +228,7 @@ export const hookHandlers = {
           where: { email: { equals: email } },
         })
         const userId = result?.docs?.[0]?.id
-        baseLog.user = userId || 'anonymous'
+        ;(baseLog.user = userId || 'anonymous'), (baseLog.type = 'security')
         break
       }
     }
